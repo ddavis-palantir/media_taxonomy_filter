@@ -91,19 +91,19 @@ class TaxonomyIndexMediaTidDepth extends TaxonomyIndexTid {
     $last = "tn";
 
     if ($this->options['depth'] > 0) {
-      $subquery->leftJoin('taxonomy_term_hierarchy', 'th', "th.tid = tn." . $refFieldName);
-      $last = "th";
+      $subquery->leftJoin('taxonomy_term__parent', 'tp', "tp.entity_id = tn." . $refFieldName);
+      $last = "tp";
       foreach (range(1, abs($this->options['depth'])) as $count) {
-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.parent = th$count.tid");
-        $where->condition("th$count.tid", $this->value, $operator);
-        $last = "th$count";
+        $subquery->leftJoin('taxonomy_term__parent', "tp$count", "$last.parent_target_id = tp$count.entity_id");
+        $where->condition("tp$count.entity_id", $this->value, $operator);
+        $last = "tp$count";
       }
     }
     elseif ($this->options['depth'] < 0) {
       foreach (range(1, abs($this->options['depth'])) as $count) {
-        $subquery->leftJoin('taxonomy_term_hierarchy', "th$count", "$last.tid = th$count.parent");
-        $where->condition("th$count.tid", $this->value, $operator);
-        $last = "th$count";
+        $subquery->leftJoin('taxonomy_term__parent', "tp$count", "$last.parent_target_id = tp$count.parent_target_id");
+        $where->condition("tp$count.entity_id", $this->value, $operator);
+        $last = "tp$count";
       }
     }
 
