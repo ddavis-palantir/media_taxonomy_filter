@@ -34,6 +34,7 @@ class IndexTidMediaDepth extends IndexTidDepth {
    */
   protected function defineOptions() {
     $options = parent::defineOptions();
+    $options['reference_field'] = ['default' => ''];
     return $options;
   }
 
@@ -45,6 +46,7 @@ class IndexTidMediaDepth extends IndexTidDepth {
     $form['reference_field'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Reference field'),
+      '#default_value' => $this->options['reference_field'],
       '#required' => TRUE,
       '#description' => $this->t('The field name (machine name) in the media entity type, which is referencing to a taxonomy. For example field_media_category.'),
     ];
