@@ -101,7 +101,7 @@ class TaxonomyIndexMediaTidDepth extends TaxonomyIndexTid {
     }
     elseif ($this->options['depth'] < 0) {
       foreach (range(1, abs($this->options['depth'])) as $count) {
-        $subquery->leftJoin('taxonomy_term__parent', "tp$count", "$last.parent_target_id = tp$count.parent_target_id");
+        $subquery->leftJoin('taxonomy_term__parent', "tp$count", "$last.entity_id = tp$count.parent_target_id");
         $where->condition("tp$count.entity_id", $this->value, $operator);
         $last = "tp$count";
       }
