@@ -1,4 +1,4 @@
-name: Media taxonomy filter
+name: Media Taxonomy Filter
 type: module
 description: 'Provides taxonomy filter with depth for media entity.'
 package: Media
