@@ -2,6 +2,7 @@
 
 namespace Drupal\media_taxonomy_filter\Plugin\views\argument;
 
+use Drupal\Core\Database\Query\Condition;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\taxonomy\Plugin\views\argument\IndexTidDepth;
@@ -93,9 +94,9 @@ class IndexTidMediaDepth extends IndexTidDepth {
     }
 
     // Now build the subqueries.
-    $subquery = db_select($refTableName, 'pt');
+    $subquery = \Drupal::database()->select($refTableName, 'pt');
     $subquery->addField('pt', 'entity_id');
-    $where = db_or()->condition('pt.' . $refFieldName, $tids, $operator);
+    $where = (new Condition('OR'))->condition('pt.' . $refFieldName, $tids, $operator);
     $last = "pt";
 
     if ($this->options['depth'] > 0) {

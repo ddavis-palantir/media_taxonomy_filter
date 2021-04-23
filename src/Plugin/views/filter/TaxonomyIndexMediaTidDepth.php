@@ -85,7 +85,7 @@ class TaxonomyIndexMediaTidDepth extends TaxonomyIndexTid {
     }
 
     // Now build the subqueries.
-    $subquery = db_select($refTableName, 'tn');
+    $subquery = \Drupal::database()->select($refTableName, 'tn');
     $subquery->addField('tn', 'entity_id');
     $where = (new Condition('OR'))->condition('tn.'. $refFieldName, $this->value, $operator);
     $last = "tn";
