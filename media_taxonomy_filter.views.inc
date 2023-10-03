@@ -35,6 +35,6 @@ function media_taxonomy_filter_views_data_alter(&$data) {
  */
 function media_taxonomy_filter_views_plugins_argument_validator_alter(array &$plugins) {
   $plugins['entity:taxonomy_term']['title'] = t('Taxonomy term ID');
-  $plugins['entity:taxonomy_term']['class'] = 'Drupal\taxonomy\Plugin\views\argument_validator\Term';
+  $plugins['entity:taxonomy_term']['class'] = 'Drupal\views\Plugin\views\argument_validator\Entity';
   $plugins['entity:taxonomy_term']['provider'] = 'taxonomy';
 }
