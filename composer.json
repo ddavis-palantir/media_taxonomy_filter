@@ -1,0 +1,14 @@
+{
+  "name": "drupal/media_taxonomy_filter",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "description": "solve the problem that Views filter named Content has taxonomy term ID (with depth) is available only for nodes",
+  "extra": {
+    "drush": {
+      "services": {
+        "drush.services.yml": "^9 || ^10"
+      }
+    }
+  }
+}
+
